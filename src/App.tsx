@@ -1,4 +1,6 @@
-import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
+import MovieGrid from "./components/MovieGrid";
 
 function App() {
   return (
@@ -8,16 +10,16 @@ function App() {
         lg: `"nav nav" "aside main"`,
       }}
     >
-      <GridItem area="nav" bg="red">
-        Nav
+      <GridItem area="nav">
+        <NavBar></NavBar>
       </GridItem>
-      <Show above='lg'>
-        <GridItem area="aside" bg="blue">
-          aside
+      <Show above="lg">
+        <GridItem area="aside" bg="#48986A">
+          Aside
         </GridItem>
       </Show>
-      <GridItem area="main" bg="green">
-        main
+      <GridItem area="main">
+        <MovieGrid></MovieGrid>
       </GridItem>
     </Grid>
   );
