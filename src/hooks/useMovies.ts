@@ -23,26 +23,33 @@ export interface Movie {
 
 const useMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
 
     const controller = new AbortController();
 
+    setLoading(true);
+
     apiClient
       .get<FetchMoviesResponse>(
         "/popular?api_key=7ca98b08beebf0d76c27b0bc5bf8579b", { signal: controller.signal }
       )
-      .then (((res) => setMovies(res.data.results)))
+      .then ((res) => {
+        setMovies(res.data.results);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
-        setError(err.message)
-      });
+        setError(err.message);
+        setLoading(false);
+      })
 
       return () => controller.abort();
   }, []);
 
-  return {movies, error };
+  return {movies, loading, error };
 }
 
 export default useMovies
