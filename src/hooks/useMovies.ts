@@ -2,10 +2,17 @@ import { useEffect, useState } from "react";
 import apiClient from "../service/api-client";
 import { CanceledError } from "axios";
 
+ interface Service {
+  provider_id: number; // id of provider
+  provider_name: string; // name of provider
+  logo_path: string; // logo of provider
+}
+
 export interface Movie {
     id: number; // id
-    title: string; //title of movie
+    title: string; // title of movie
     poster_path: string; // poster pic
+    services: Service[]; // streaming servvices
   }
   
   interface FetchMoviesResponse {
