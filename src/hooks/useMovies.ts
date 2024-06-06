@@ -34,7 +34,7 @@ const useMovies = () => {
 
     apiClient
       .get<FetchMoviesResponse>(
-        "/popular?api_key=7ca98b08beebf0d76c27b0bc5bf8579b", { signal: controller.signal }
+        "/movie/popular?api_key=7ca98b08beebf0d76c27b0bc5bf8579b", { signal: controller.signal }
       )
       .then ((res) => {
         setMovies(res.data.results);
