@@ -13,14 +13,16 @@ const MovieGrid = () => {
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={10}
-        padding={10}
+        paddingLeft={10}
+        paddingRight={10}
+        minChildWidth="200px"
       >
         {loading &&
           loaders.map((loader) => (
-            <MovieCardLoading key={loader}></MovieCardLoading>
+            <MovieCardLoading key={loader} />
           ))}
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie}></MovieCard>
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </SimpleGrid>
     </>

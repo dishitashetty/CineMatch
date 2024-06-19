@@ -8,10 +8,10 @@ interface Props {
 
 const MovieCard = ({ movie }: Props) => {
   return (
-    <Card width="300px" borderRadius={10} overflow={"hidden"}>
+    <Card width="100%" borderRadius={10} overflow={"hidden"}>
       <Image
         src={`${"https://image.tmdb.org/t/p/original/"}${movie.poster_path}`}
-      ></Image>
+      />
       <CardBody>
         <Heading fontSize="2xl">{movie.title}</Heading>
         <HStack justifyContent={"space-between"}>
@@ -19,13 +19,13 @@ const MovieCard = ({ movie }: Props) => {
             movie.services.map((service) => (
               <>
                 <Text key={service.provider_id}>{service.provider_name}</Text>
-                <Image src={service.logo_path}></Image>
+                <Image src={service.logo_path} />
               </>
             ))
           ) : (
             <Text>No streaming services available</Text>
           )}
-          <VoteAverage score={movie.vote_average}></VoteAverage>
+          <VoteAverage score={movie.vote_average} />
         </HStack>
       </CardBody>
     </Card>

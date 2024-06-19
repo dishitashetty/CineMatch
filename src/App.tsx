@@ -1,21 +1,22 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show, VStack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import MovieGrid from "./components/MovieGrid";
+import Aside from "./components/Aside";
 
 function App() {
   return (
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`,
+        sm: `"nav nav" "aside main"`,
       }}
     >
       <GridItem area="nav">
         <NavBar></NavBar>
       </GridItem>
-      <Show above="lg">
-        <GridItem area="aside" bg="#48986A">
-          Aside
+      <Show above="sm">
+        <GridItem area="aside">
+          <Aside></Aside>
         </GridItem>
       </Show>
       <GridItem area="main">
