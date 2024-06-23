@@ -1,64 +1,6 @@
-import React, { useState } from "react";
-import { Box, Text } from "@chakra-ui/react";
-import Select, { MultiValue, StylesConfig } from "react-select";
+import { Box, Text, Checkbox, CheckboxGroup, Flex } from "@chakra-ui/react";
 
-interface OptionType {
-  value: string;
-  label: string;
-}
-
-const PlatformSelector: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MultiValue<OptionType>>([]);
-
-  const handleChange = (selected: MultiValue<OptionType>) => {
-    setSelectedOptions(selected);
-  };
-
-  const options: OptionType[] = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3" },
-  ];
-
-  const customStyles: StylesConfig<OptionType, true> = {
-    control: (provided, state) => ({
-      ...provided,
-      border: "2px solid #48986A",
-      borderRadius: 10,
-      boxShadow: state.isFocused ? "none" : undefined,
-      "&:hover": {
-        border: "2px solid #48986A",
-      },
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "#48986A" : state.isFocused ? "#48986A" : undefined,
-      color: state.isSelected ? "white" : "black",
-      "&:active": {
-        backgroundColor: state.isSelected ? "#48986A" : "#48986A",
-      },
-    }),
-    multiValue: (provided) => ({
-      ...provided,
-      backgroundColor: "#48986A",
-      borderRadius: 5,
-      color: "white",
-      padding: "2px",
-    }),
-    multiValueLabel: (provided) => ({
-      ...provided,
-      color: "white",
-    }),
-    multiValueRemove: (provided) => ({
-      ...provided,
-      color: "white",
-      ':hover': {
-        backgroundColor: "#285C43",
-        color: "white",
-      },
-    }),
-  };
-
+const PlatformCheckbox = () => {
   return (
     <Box width="100%">
       <Text
@@ -67,20 +9,178 @@ const PlatformSelector: React.FC = () => {
         fontWeight={600}
         border="2px solid #48986A"
         padding={2}
-        borderRadius={10}
+        borderRadius={5}
       >
         Platform
       </Text>
-      <Select
-        isMulti
-        value={selectedOptions}
-        onChange={handleChange}
-        options={options}
-        placeholder="Select"
-        styles={customStyles}
-      />
+      <CheckboxGroup defaultValue={[""]}>
+        <Flex wrap="wrap" gap={3}>
+          <Checkbox
+            value="action"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Netflix
+          </Checkbox>
+          <Checkbox
+            value="adventure"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Hulu
+          </Checkbox>
+          <Checkbox
+            value="animation"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Amazon Prime Video
+          </Checkbox>
+          <Checkbox
+            value="comedy"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            HBO Max
+          </Checkbox>
+          <Checkbox
+            value="crime"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Disney+
+          </Checkbox>
+          <Checkbox
+            value="documentary"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Peacock
+          </Checkbox>
+          <Checkbox
+            value="drama"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Youtube TV
+          </Checkbox>
+          <Checkbox
+            value="family"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Fubo
+          </Checkbox>
+          <Checkbox
+            value="fantasy"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Tubi
+          </Checkbox>
+        </Flex>
+      </CheckboxGroup>
     </Box>
   );
 };
 
-export default PlatformSelector;
+export default PlatformCheckbox;

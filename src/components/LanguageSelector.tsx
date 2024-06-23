@@ -7,7 +7,7 @@ interface OptionType {
   label: string;
 }
 
-const LanguageSelector: React.FC = () => {
+const CastSelector: React.FC = () => {
   const [selectedOptions, setSelectedOptions] = useState<MultiValue<OptionType>>([]);
 
   const handleChange = (selected: MultiValue<OptionType>) => {
@@ -83,4 +83,4 @@ const LanguageSelector: React.FC = () => {
   );
 };
 
-export default LanguageSelector;
+export default CastSelector;
