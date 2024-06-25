@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   RangeSlider,
   RangeSliderTrack,
@@ -12,7 +12,23 @@ import {
 const RuntimeSlider = () => {
   const minRuntime = 0;
   const maxRuntime = 240;
-  const [sliderValues, setSliderValues] = useState([0, 240]);
+  const [sliderValues, setSliderValues] = useState([60, 180]); // Adjusted default values to state
+
+  // Handler to update the state when slider values change
+  const handleSliderChange = (val: number[]) => {
+    setSliderValues(val);
+  };
+
+  // Effect to log changes to the console
+  useEffect(() => {
+    console.log(
+      "Selected Runtime Range: ",
+      sliderValues[0],
+      "-",
+      sliderValues[1],
+      "minutes"
+    );
+  }, [sliderValues]);
 
   return (
     <Box width="100%">
@@ -27,11 +43,11 @@ const RuntimeSlider = () => {
         Runtime
       </Text>
       <RangeSlider
-        aria-label={["min", "max"]}
+        aria-label={["minRuntime", "maxRuntime"]}
         defaultValue={[60, 180]}
         min={minRuntime}
         max={maxRuntime}
-        onChange={(val) => setSliderValues(val)}
+        onChange={handleSliderChange}
       >
         <RangeSliderTrack>
           <RangeSliderFilledTrack bg="#48986A" />
@@ -45,7 +61,7 @@ const RuntimeSlider = () => {
       </Flex>
       <Flex justifyContent="center" mt={2}>
         <Text fontSize={14}>
-          Selected: {sliderValues[0]} - {sliderValues[1]}
+          Selected: {sliderValues[0]} - {sliderValues[1]} min
         </Text>
       </Flex>
     </Box>

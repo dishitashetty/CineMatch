@@ -1,6 +1,20 @@
 import { Box, Text, Checkbox, CheckboxGroup, Flex } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 
 const PlatformCheckbox = () => {
+  // State to keep track of selected platforms
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+
+  // Handler to update the state when checkbox selections change
+  const handlePlatformChange = (nextValues: string[]) => {
+    setSelectedPlatforms(nextValues);
+  };
+
+  // Effect to log changes to the console
+  useEffect(() => {
+    console.log("Selected Platforms: ", selectedPlatforms);
+  }, [selectedPlatforms]);
+
   return (
     <Box width="100%">
       <Text
@@ -13,7 +27,8 @@ const PlatformCheckbox = () => {
       >
         Platform
       </Text>
-      <CheckboxGroup defaultValue={[""]}>
+
+      <CheckboxGroup value={selectedPlatforms} onChange={handlePlatformChange}>
         <Flex wrap="wrap" gap={3}>
           <Checkbox
             value="action"

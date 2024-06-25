@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Select, { MultiValue, StylesConfig } from "react-select";
 
@@ -7,12 +7,23 @@ interface OptionType {
   label: string;
 }
 
-const CastSelector: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<MultiValue<OptionType>>([]);
+const LanguageSelector: React.FC = () => {
+  const [selectedOptions, setSelectedOptions] = useState<
+    MultiValue<OptionType>
+  >([]);
 
+  // Function to handle changes in the selection
   const handleChange = (selected: MultiValue<OptionType>) => {
     setSelectedOptions(selected);
   };
+
+  // Use useEffect to log changes whenever selectedOptions changes
+  useEffect(() => {
+    console.log(
+      "Selected Languages: ",
+      selectedOptions.map((option) => option.label).join(", ")
+    );
+  }, [selectedOptions]);
 
   const options: OptionType[] = [
     { value: "English", label: "English" },
@@ -32,7 +43,11 @@ const CastSelector: React.FC = () => {
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? "#48986A" : state.isFocused ? "#48986A" : undefined,
+      backgroundColor: state.isSelected
+        ? "#48986A"
+        : state.isFocused
+        ? "#48986A"
+        : undefined,
       color: state.isSelected ? "white" : "black",
       "&:active": {
         backgroundColor: state.isSelected ? "#48986A" : "#48986A",
@@ -52,7 +67,7 @@ const CastSelector: React.FC = () => {
     multiValueRemove: (provided) => ({
       ...provided,
       color: "white",
-      ':hover': {
+      ":hover": {
         backgroundColor: "#285C43",
         color: "white",
       },
@@ -76,11 +91,11 @@ const CastSelector: React.FC = () => {
         value={selectedOptions}
         onChange={handleChange}
         options={options}
-        defaultInputValue="English"
+        placeholder="Select languages"
         styles={customStyles}
       />
     </Box>
   );
 };
 
-export default CastSelector;
+export default LanguageSelector;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   RangeSlider,
   RangeSliderTrack,
@@ -14,6 +14,21 @@ const RatingSlider = () => {
   const maxRating = 10;
   const [sliderValues, setSliderValues] = useState([0, 10]);
 
+  // Handler to update the state when slider values change
+  const handleSliderChange = (val: number[]) => {
+    setSliderValues(val);
+  };
+
+  // Effect to log changes to the console
+  useEffect(() => {
+    console.log(
+      "Selected Rating Range: ",
+      sliderValues[0],
+      "-",
+      sliderValues[1]
+    );
+  }, [sliderValues]);
+
   return (
     <Box width="100%">
       <Text
@@ -27,11 +42,11 @@ const RatingSlider = () => {
         Rating
       </Text>
       <RangeSlider
-        aria-label={["min", "max"]}
+        aria-label={["minRating", "maxRating"]}
         defaultValue={[6, 10]}
         min={minRating}
         max={maxRating}
-        onChange={(val) => setSliderValues(val)}
+        onChange={handleSliderChange}
       >
         <RangeSliderTrack>
           <RangeSliderFilledTrack bg="#48986A" />

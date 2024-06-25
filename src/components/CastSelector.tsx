@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Select, { MultiValue, StylesConfig } from "react-select";
 
@@ -13,6 +13,11 @@ const CastSelector: React.FC = () => {
   const handleChange = (selected: MultiValue<OptionType>) => {
     setSelectedOptions(selected);
   };
+
+  // Log changes to the console whenever the selectedOptions change
+  useEffect(() => {
+    console.log("Selected Cast Members: ", selectedOptions.map(option => option.label).join(", "));
+  }, [selectedOptions]);
 
   const options: OptionType[] = [
     { value: "option1", label: "Option 1" },

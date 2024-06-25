@@ -7,12 +7,27 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ReleaseSlider = () => {
   const minYear = 1850;
   const maxYear = 2024;
   const [sliderValues, setSliderValues] = useState([1990, 2024]);
+
+  // Handler to update the state when slider values change
+  const handleSliderChange = (val: number[]) => {
+    setSliderValues(val);
+  };
+
+  // Effect to log changes to the console
+  useEffect(() => {
+    console.log(
+      "Selected Release Year Range: ",
+      sliderValues[0],
+      "-",
+      sliderValues[1]
+    );
+  }, [sliderValues]);
 
   return (
     <Box width="100%">
@@ -27,11 +42,11 @@ const ReleaseSlider = () => {
         Release Year
       </Text>
       <RangeSlider
-        aria-label={["min", "max"]}
+        aria-label={["minReleaseYear", "maxReleaseYear"]}
         defaultValue={[1990, 2024]}
         min={minYear}
         max={maxYear}
-        onChange={(val) => setSliderValues(val)}
+        onChange={handleSliderChange}
       >
         <RangeSliderTrack>
           <RangeSliderFilledTrack bg="#48986A" />
