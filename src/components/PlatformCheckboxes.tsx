@@ -1,16 +1,16 @@
 import { Box, Text, Checkbox, CheckboxGroup, Flex } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const PlatformCheckbox = () => {
-  // State to keep track of selected platforms
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+interface PlatformCheckboxProps {
+  selectedPlatforms: string[];
+  onPlatformChange: (platforms: string[]) => void;
+}
 
-  // Handler to update the state when checkbox selections change
+const PlatformCheckbox = ({ selectedPlatforms, onPlatformChange }: PlatformCheckboxProps) => {
   const handlePlatformChange = (nextValues: string[]) => {
-    setSelectedPlatforms(nextValues);
+    onPlatformChange(nextValues);
   };
 
-  // Effect to log changes to the console
   useEffect(() => {
     console.log("Selected Platforms: ", selectedPlatforms);
   }, [selectedPlatforms]);

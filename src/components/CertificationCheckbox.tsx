@@ -1,18 +1,16 @@
 import { Box, Text, Checkbox, CheckboxGroup, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const CertificationCheckbox = () => {
-  // State to keep track of selected certifications
-  const [selectedCertifications, setSelectedCertifications] = useState<
-    string[]
-  >([]);
+interface CertificationCheckboxProps {
+  selectedCertifications: string[];
+  onCertificationChange: (certifications: string[]) => void;
+}
 
-  // Handler to update the state when checkbox selections change
+const CertificationCheckbox = ({ selectedCertifications, onCertificationChange }: CertificationCheckboxProps) => {
   const handleCertificationChange = (nextValues: string[]) => {
-    setSelectedCertifications(nextValues);
+    onCertificationChange(nextValues);
   };
 
-  // Effect to log changes to the console
   useEffect(() => {
     console.log("Selected Certifications: ", selectedCertifications);
   }, [selectedCertifications]);
@@ -35,7 +33,6 @@ const CertificationCheckbox = () => {
         onChange={handleCertificationChange}
       >
         <Flex wrap="wrap" gap={3}>
-          {/* Each Checkbox now updates the selectedCertifications state */}
           <Checkbox
             value="0"
             sx={{

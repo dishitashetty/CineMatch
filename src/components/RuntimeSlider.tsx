@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   RangeSlider,
   RangeSliderTrack,
@@ -9,26 +8,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const RuntimeSlider = () => {
+interface RuntimeSliderProps {
+  selectedRuntimes: [number, number];
+  onRuntimeChange: (runtimes: [number, number]) => void;
+}
+
+const RuntimeSlider = ({ selectedRuntimes, onRuntimeChange }: RuntimeSliderProps) => {
   const minRuntime = 0;
   const maxRuntime = 240;
-  const [sliderValues, setSliderValues] = useState([60, 180]); // Adjusted default values to state
 
   // Handler to update the state when slider values change
   const handleSliderChange = (val: number[]) => {
-    setSliderValues(val);
+    onRuntimeChange([val[0], val[1]]);
   };
-
-  // Effect to log changes to the console
-  useEffect(() => {
-    console.log(
-      "Selected Runtime Range: ",
-      sliderValues[0],
-      "-",
-      sliderValues[1],
-      "minutes"
-    );
-  }, [sliderValues]);
 
   return (
     <Box width="100%">
@@ -44,7 +36,7 @@ const RuntimeSlider = () => {
       </Text>
       <RangeSlider
         aria-label={["minRuntime", "maxRuntime"]}
-        defaultValue={[60, 180]}
+        defaultValue={selectedRuntimes}
         min={minRuntime}
         max={maxRuntime}
         onChange={handleSliderChange}
@@ -61,7 +53,7 @@ const RuntimeSlider = () => {
       </Flex>
       <Flex justifyContent="center" mt={2}>
         <Text fontSize={14}>
-          Selected: {sliderValues[0]} - {sliderValues[1]} min
+          Selected: {selectedRuntimes[0]} - {selectedRuntimes[1]} min
         </Text>
       </Flex>
     </Box>

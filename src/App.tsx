@@ -1,9 +1,20 @@
-import { Grid, GridItem, Show, VStack } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import MovieGrid from "./components/MovieGrid";
 import Aside from "./components/Aside";
+import { useState } from "react";
+import { MovieFilters } from "./hooks/useMovies";
 
 function App() {
+  const [filters, setFilters] = useState<MovieFilters>({});
+
+  const handleFiltersChange = (newFilters: Partial<MovieFilters>) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...newFilters
+    }));
+  };
+
   return (
     <Grid
       templateAreas={{
@@ -16,11 +27,11 @@ function App() {
       </GridItem>
       <Show above="sm">
         <GridItem area="aside">
-          <Aside></Aside>
+          <Aside onFiltersChange={handleFiltersChange}></Aside>
         </GridItem>
       </Show>
       <GridItem area="main">
-        <MovieGrid></MovieGrid>
+        <MovieGrid filters={filters}></MovieGrid>
       </GridItem>
     </Grid>
   );

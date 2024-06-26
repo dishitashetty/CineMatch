@@ -1,21 +1,19 @@
 import { Box, Text, Checkbox, CheckboxGroup, Flex } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const GenreCheckbox = () => {
-  // State to keep track of selected genres
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+interface GenreCheckboxProps {
+  selectedGenres: string[];
+  onGenreChange: (genres: string[]) => void;
+}
 
-  // Handler to update the state when checkbox selections change
+const GenreCheckbox = ({ selectedGenres, onGenreChange }: GenreCheckboxProps) => {
   const handleGenreChange = (nextValues: string[]) => {
-    setSelectedGenres(nextValues);
+    onGenreChange(nextValues);
   };
 
-  // Effect to log changes to the console
   useEffect(() => {
     console.log("Selected Genres: ", selectedGenres);
   }, [selectedGenres]);
-
-  // Array of genres with labels and values
   const genres = [
     { label: "Action", value: "28" },
     { label: "Adventure", value: "12" },
@@ -53,21 +51,24 @@ const GenreCheckbox = () => {
 
       <CheckboxGroup value={selectedGenres} onChange={handleGenreChange}>
         <Flex wrap="wrap" gap={3}>
-          {/* Render checkboxes for each genre */}
           {genres.map(genre => (
-            <Checkbox key={genre.value} value={genre.value} sx={{
-              "& .chakra-checkbox__control[data-checked]": {
-                bg: "#48986A",
-                borderColor: "#48986A",
-              },
-              "& .chakra-checkbox__control:hover": {
-                borderColor: "#48986A",
-              },
-              "& .chakra-checkbox__control[data-checked]:hover": {
-                bg: "#48986A",
-                borderColor: "#48986A",
-              },
-            }}>
+            <Checkbox
+              key={genre.value}
+              value={genre.value}
+              sx={{
+                "& .chakra-checkbox__control[data-checked]": {
+                  bg: "#48986A",
+                  borderColor: "#48986A",
+                },
+                "& .chakra-checkbox__control:hover": {
+                  borderColor: "#48986A",
+                },
+                "& .chakra-checkbox__control[data-checked]:hover": {
+                  bg: "#48986A",
+                  borderColor: "#48986A",
+                },
+              }}
+            >
               {genre.label}
             </Checkbox>
           ))}

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   RangeSlider,
   RangeSliderTrack,
@@ -9,25 +8,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const RatingSlider = () => {
+interface RatingSliderProps {
+  selectedRatings: [number, number];
+  onRatingChange: (ratings: [number, number]) => void;
+}
+
+const RatingSlider = ({ selectedRatings, onRatingChange }: RatingSliderProps) => {
   const minRating = 0;
   const maxRating = 10;
-  const [sliderValues, setSliderValues] = useState([0, 10]);
 
   // Handler to update the state when slider values change
   const handleSliderChange = (val: number[]) => {
-    setSliderValues(val);
+    onRatingChange([val[0], val[1]]);
   };
-
-  // Effect to log changes to the console
-  useEffect(() => {
-    console.log(
-      "Selected Rating Range: ",
-      sliderValues[0],
-      "-",
-      sliderValues[1]
-    );
-  }, [sliderValues]);
 
   return (
     <Box width="100%">
@@ -43,7 +36,7 @@ const RatingSlider = () => {
       </Text>
       <RangeSlider
         aria-label={["minRating", "maxRating"]}
-        defaultValue={[6, 10]}
+        defaultValue={selectedRatings}
         min={minRating}
         max={maxRating}
         onChange={handleSliderChange}
@@ -60,7 +53,7 @@ const RatingSlider = () => {
       </Flex>
       <Flex justifyContent="center" mt={2}>
         <Text fontSize={14}>
-          Selected: {sliderValues[0]} - {sliderValues[1]}
+          Selected: {selectedRatings[0]} - {selectedRatings[1]}
         </Text>
       </Flex>
     </Box>

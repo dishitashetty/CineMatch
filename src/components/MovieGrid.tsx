@@ -1,15 +1,13 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useMovies, { Movie, MovieFilters } from "../hooks/useMovies";
+import useMovies, { MovieFilters } from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 
-const MovieGrid = () => {
-  const defaultFilters: MovieFilters = {
-    region: 'US',
-    watch_region: 'US',
-    language: 'en-US'
-  };
+interface MovieGridProps {
+  filters: MovieFilters;
+}
 
-  const { movies, loading, error } = useMovies(defaultFilters); // Pass default filters
+const MovieGrid = ({ filters }: MovieGridProps) => {
+  const { movies, loading, error } = useMovies(filters);
 
   return (
     <>
@@ -24,9 +22,7 @@ const MovieGrid = () => {
         {loading ? (
           <Text>Loading...</Text> /* Placeholder for loading state */
         ) : (
-          movies.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))
+          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         )}
       </SimpleGrid>
     </>
