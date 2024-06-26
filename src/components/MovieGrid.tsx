@@ -1,11 +1,15 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useMovies, { Movie } from "../hooks/useMovies";
+import useMovies, { Movie, MovieFilters } from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
-import MovieCardLoading from "./MovieCardLoading";
 
 const MovieGrid = () => {
-  const { movies, loading, error } = useMovies({}); // Ensure to pass default filters if needed
-  const loaders = [1, 2, 3, 4, 5, 6, 7, 8];
+  const defaultFilters: MovieFilters = {
+    region: 'US',
+    watch_region: 'US',
+    language: 'en-US'
+  };
+
+  const { movies, loading, error } = useMovies(defaultFilters); // Pass default filters
 
   return (
     <>
@@ -17,13 +21,13 @@ const MovieGrid = () => {
         paddingRight={10}
         minChildWidth="200px"
       >
-        {loading
-          ? loaders.map((loader) => <MovieCardLoading key={loader} />)
-          : movies.map(
-              (
-                movie: Movie // Ensure to specify the type of 'movie'
-              ) => <MovieCard key={movie.id} movie={movie} />
-            )}
+        {loading ? (
+          <Text>Loading...</Text> /* Placeholder for loading state */
+        ) : (
+          movies.map(movie => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))
+        )}
       </SimpleGrid>
     </>
   );

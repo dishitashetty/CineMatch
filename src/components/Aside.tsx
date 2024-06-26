@@ -6,7 +6,6 @@ import GenreCheckbox from "./GenreCheckbox";
 import RatingSlider from "./RatingSlider";
 import CertificationCheckbox from "./CertificationCheckbox";
 import CastSelector from "./CastSelector";
-import LanguageSelector from "./LanguageSelector";
 import PlatformCheckbox from "./PlatformCheckboxes";
 
 const Aside = () => {
@@ -38,9 +37,6 @@ const Aside = () => {
       </Box>
       <Box>
         <CertificationCheckbox></CertificationCheckbox>
-      </Box>
-      <Box>
-        <LanguageSelector></LanguageSelector>
       </Box>
       <Box>
         <RefreshButton></RefreshButton>

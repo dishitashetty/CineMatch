@@ -31,7 +31,7 @@ const PlatformCheckbox = () => {
       <CheckboxGroup value={selectedPlatforms} onChange={handlePlatformChange}>
         <Flex wrap="wrap" gap={3}>
           <Checkbox
-            value="action"
+            value="8"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -49,7 +49,7 @@ const PlatformCheckbox = () => {
             Netflix
           </Checkbox>
           <Checkbox
-            value="adventure"
+            value="15"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -67,7 +67,7 @@ const PlatformCheckbox = () => {
             Hulu
           </Checkbox>
           <Checkbox
-            value="animation"
+            value="119"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -85,7 +85,7 @@ const PlatformCheckbox = () => {
             Amazon Prime Video
           </Checkbox>
           <Checkbox
-            value="comedy"
+            value="384"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -103,7 +103,7 @@ const PlatformCheckbox = () => {
             HBO Max
           </Checkbox>
           <Checkbox
-            value="crime"
+            value="337"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -121,7 +121,25 @@ const PlatformCheckbox = () => {
             Disney+
           </Checkbox>
           <Checkbox
-            value="documentary"
+            value="2"
+            sx={{
+              "& .chakra-checkbox__control[data-checked]": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control:hover": {
+                borderColor: "#48986A",
+              },
+              "& .chakra-checkbox__control[data-checked]:hover": {
+                bg: "#48986A",
+                borderColor: "#48986A",
+              },
+            }}
+          >
+            Apple TV
+          </Checkbox>
+          <Checkbox
+            value="386"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -139,7 +157,7 @@ const PlatformCheckbox = () => {
             Peacock
           </Checkbox>
           <Checkbox
-            value="drama"
+            value="257"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
@@ -154,28 +172,10 @@ const PlatformCheckbox = () => {
               },
             }}
           >
-            Youtube TV
+            FuboTV
           </Checkbox>
           <Checkbox
-            value="family"
-            sx={{
-              "& .chakra-checkbox__control[data-checked]": {
-                bg: "#48986A",
-                borderColor: "#48986A",
-              },
-              "& .chakra-checkbox__control:hover": {
-                borderColor: "#48986A",
-              },
-              "& .chakra-checkbox__control[data-checked]:hover": {
-                bg: "#48986A",
-                borderColor: "#48986A",
-              },
-            }}
-          >
-            Fubo
-          </Checkbox>
-          <Checkbox
-            value="fantasy"
+            value="73"
             sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",

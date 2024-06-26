@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-
-export interface Service {
-  provider_id: number;
-  provider_name: string;
-  logo_path: string;
-}
+import apiClient from "../services/api-client";
+import { CanceledError } from "axios";
 
 export interface Movie {
   id: number;
   title: string;
   poster_path: string;
-  services: Service[];
   vote_average: number;
 }
 
@@ -27,8 +22,9 @@ export interface MovieFilters {
   with_runtime_lte?: number;
   with_watch_providers?: string;
   with_keywords?: string;
+  region?: string;
+  watch_region?: string;
 }
-
 
 const useMovies = (filters: MovieFilters) => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -36,47 +32,35 @@ const useMovies = (filters: MovieFilters) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams({
-      language: filters.language || 'en-US',
-      certification: filters.certification || '',
-      'vote_average.gte': filters.vote_average_gte?.toString() || '',
-      'vote_average.lte': filters.vote_average_lte?.toString() || '',
-      with_genres: filters.with_genres || '',
-      with_cast: filters.with_cast || '',
-      'release_date.gte': filters.release_date_gte || '',
-      'release_date.lte': filters.release_date_lte || '',
-      'with_runtime.gte': filters.with_runtime_gte?.toString() || '',
-      'with_runtime.lte': filters.with_runtime_lte?.toString() || '',
-      with_watch_providers: filters.with_watch_providers || '',
-      with_keywords: filters.with_keywords || '',
-    });
+    const fetchMovies = async () => {
+      const controller = new AbortController();
+      const params = {
+        ...filters,
+        api_key: '7ca98b08beebf0d76c27b0bc5bf8579b', // Added API key here for simplicity
+        region: 'US',
+        watch_region: 'US',
+        language: 'en-US'
+      };
 
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Y2E5OGIwOGJlZWJmMGQ3NmMyN2IwYmM1YmY4NTc5YiIsIm5iZiI6MTcxOTI3NDg4NS4wNTU5NzQsInN1YiI6IjY2M2ZkYTIxYzlkNDU4ODlhMGMwODE3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._mAHNWy8Nfv_LE0kEzqQZ9SaCXBHheE20mo4R4XG4xk'
+      try {
+        const response = await apiClient.get('/discover/movie', { params, signal: controller.signal });
+        setMovies(response.data.results);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof CanceledError) return;
+        setError('Failed to fetch movies');
+        setLoading(false);
       }
+
+      return () => {
+        controller.abort();
+      };
     };
 
-    const url = `https://api.themoviedb.org/3/discover/movie?${params.toString()}`;
-
-    setLoading(true);
-    fetch(url, options)
-      .then(response => response.json())
-      .then(response => {
-        setMovies(response.results);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setError("Failed to fetch movies");
-        setLoading(false);
-      });
-
-  }, [filters]);
+    fetchMovies();
+  }, [filters]); // Dependency array to trigger re-fetch when filters change
 
   return { movies, loading, error };
-}
+};
 
 export default useMovies;

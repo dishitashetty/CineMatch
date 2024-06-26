@@ -15,6 +15,29 @@ const GenreCheckbox = () => {
     console.log("Selected Genres: ", selectedGenres);
   }, [selectedGenres]);
 
+  // Array of genres with labels and values
+  const genres = [
+    { label: "Action", value: "28" },
+    { label: "Adventure", value: "12" },
+    { label: "Animation", value: "16" },
+    { label: "Comedy", value: "35" },
+    { label: "Crime", value: "80" },
+    { label: "Documentary", value: "99" },
+    { label: "Drama", value: "18" },
+    { label: "Family", value: "10751" },
+    { label: "Fantasy", value: "14" },
+    { label: "History", value: "36" },
+    { label: "Horror", value: "27" },
+    { label: "Music", value: "10402" },
+    { label: "Mystery", value: "9648" },
+    { label: "Romance", value: "10749" },
+    { label: "Science Fiction", value: "878" },
+    { label: "TV Movie", value: "10770" },
+    { label: "Thriller", value: "53" },
+    { label: "War", value: "10752" },
+    { label: "Western", value: "37" }
+  ];
+
   return (
     <Box width="100%">
       <Text
@@ -30,15 +53,9 @@ const GenreCheckbox = () => {
 
       <CheckboxGroup value={selectedGenres} onChange={handleGenreChange}>
         <Flex wrap="wrap" gap={3}>
-          {/* Checkboxes for each genre */}
-          {/* Adjust the 'value' attributes if you're using genre IDs from an API */}
-          {[
-            "Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary",
-            "Drama", "Family", "Fantasy", "History", "Horror", "Music",
-            "Mystery", "Romance", "Science Fiction", "TV Movie", "Thriller",
-            "War", "Western"
-          ].map(genre => (
-            <Checkbox key={genre} value={genre.toLowerCase()} sx={{
+          {/* Render checkboxes for each genre */}
+          {genres.map(genre => (
+            <Checkbox key={genre.value} value={genre.value} sx={{
               "& .chakra-checkbox__control[data-checked]": {
                 bg: "#48986A",
                 borderColor: "#48986A",
@@ -51,7 +68,7 @@ const GenreCheckbox = () => {
                 borderColor: "#48986A",
               },
             }}>
-              {genre}
+              {genre.label}
             </Checkbox>
           ))}
         </Flex>
